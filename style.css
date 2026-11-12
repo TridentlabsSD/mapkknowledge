@@ -53,3 +53,15 @@
  background:rgba(130,225,255,.24)!important;
  filter:drop-shadow(0 0 9px #8e8cff) brightness(1.7)!important;
 }
+
+/* MAPKNWLEDGE - controller positioning fix */
+
+.controller.edit {
+  position: relative !important;
+  margin-top: 0 !important;
+  transform: none !important;
+  transform-origin: center center !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+}
