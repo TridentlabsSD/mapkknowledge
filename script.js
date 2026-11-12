@@ -31,6 +31,7 @@ function move(el,center,x,y){
  const range=25;
  el.style.left=((center[0]+axis(x)*range)/W*100)+'%';
  el.style.top=((center[1]+axis(y)*range)/H*100)+'%';
+ el.classList.toggle('moving',Math.hypot(axis(x),axis(y))>.08);
 }
 function active(pad,i){const b=pad.buttons?.[i];return !!b&&(b.pressed||b.value>.25);}
 function getPad(){
