@@ -1,48 +1,55 @@
-/* MAPKNWLEDGE — Radar Viper 1:1 art skin for Gamepad Viewer Beta
-   Images are already hosted in the same GitHub Pages directory as this CSS.
-   Replace your old style.css with this entire file.
+/* MAPKNWLEDGE IRIDESCENT - Gamepad Viewer Beta Xbox One
+   Assets hosted alongside style.css in GitHub Pages.
+   The controller artwork is 1774x887; thumb centers: L 538,274 / R 1050,441.
+   Gamepad Viewer Beta markup can vary; inspect live DOM if elements are offset.
 */
-:root { --mk-base: url('./body-with-stick-cutouts.png'); --mk-left: url('./stick-left.png'); --mk-right: url('./stick-right.png'); }
-
-/* Use the ORIGINAL Xbox One layout as the input engine.  Replace its visible body
-   with the exact 1672 x 941 image (transparent outside the controller). */
+:root {
+ --mk-body: url("./controller-body.png");
+ --mk-left: url("./stick-left.png");
+ --mk-right: url("./stick-right.png");
+}
+/* Replace the Xbox faceplate with the supplied artwork. */
 .controller.edit {
-  width: 1672px !important;
-  height: 941px !important;
-  background: var(--mk-base) center center / 100% 100% no-repeat !important;
-  filter: none !important;
-  box-shadow: none !important;
-  transform-origin: top left;
+ position: relative !important;
+ width: 1774px !important;
+ height: 887px !important;
+ background: var(--mk-body) center / 100% 100% no-repeat !important;
+ border: 0 !important;
+ box-shadow: none !important;
+ filter: none !important;
+ overflow: visible !important;
 }
-/* Hide the old SVG / sprite faceplate if it is a background pseudo-element. */
-.controller.edit::before, .controller.edit::after { content: none !important; }
-
-/* The extracted analog graphics are 208px squares, centered on their cutouts.
-   Stick input movement is still performed by Gamepad Viewer's own script. */
-.controller.edit .stick.left,
-.controller.edit .stick.right {
-  position: absolute !important;
-  width: 208px !important;
-  height: 208px !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  filter: none !important;
-  background-repeat: no-repeat !important;
-  background-size: 100% 100% !important;
-  background-position: center !important;
-  z-index: 12 !important;
+.controller.edit::before,.controller.edit::after {content:none!important;}
+/* Suppress original static faceplate graphics, while leaving input nodes active. */
+.controller.edit .face,.controller.edit .body,.controller.edit .back,
+.controller.edit .front,.controller.edit .controller-body {
+ background-image:none!important;
+ box-shadow:none!important;
 }
-.controller.edit .stick.left { left: 338px !important; top: 210px !important; background-image: var(--mk-left) !important; }
-.controller.edit .stick.right { left: 922px !important; top: 418px !important; background-image: var(--mk-right) !important; }
-.controller.edit .stick.left::before,
-.controller.edit .stick.left::after,
-.controller.edit .stick.right::before,
-.controller.edit .stick.right::after { display: none !important; }
-
-/* Press states: high-contrast white when inputs are received. */
-.controller.edit .a.pressed, .controller.edit .b.pressed,
-.controller.edit .x.pressed, .controller.edit .y.pressed,
-.controller.edit .button.pressed, .controller.edit .bumper.pressed,
-.controller.edit .trigger.pressed, .controller.edit .dpad.pressed {
-  filter: brightness(2) drop-shadow(0 0 7px white) !important;
+/* Thumb art: the GPV engine should continue to update stick movement. */
+.controller.edit .stick.left,.controller.edit .stick.right {
+ position:absolute!important;
+ width:152px!important;
+ height:152px!important;
+ border:0!important;
+ border-radius:50%!important;
+ background-size:100% 100%!important;
+ background-repeat:no-repeat!important;
+ background-position:center!important;
+ box-shadow:none!important;
+ filter:none!important;
+ z-index:20!important;
+}
+.controller.edit .stick.left {left:462px!important;top:198px!important;background-image:var(--mk-left)!important;}
+.controller.edit .stick.right {left:974px!important;top:365px!important;background-image:var(--mk-right)!important;}
+.controller.edit .stick.left::before,.controller.edit .stick.left::after,
+.controller.edit .stick.right::before,.controller.edit .stick.right::after {content:none!important;}
+/* Hide duplicate static controller buttons; illuminate presses on top of artwork. */
+.controller.edit .button,.controller.edit .bumper,.controller.edit .trigger,
+.controller.edit .dpad {opacity:0!important;}
+.controller.edit .button.pressed,.controller.edit .bumper.pressed,
+.controller.edit .trigger.pressed,.controller.edit .dpad.pressed {
+ opacity:.75!important;
+ background:rgba(130,225,255,.24)!important;
+ filter:drop-shadow(0 0 9px #8e8cff) brightness(1.7)!important;
 }

@@ -1,12 +1,9 @@
-MAPKNWLEDGE 1:1 CONTROLLER ASSET PACK
+MAPKNWLEDGE IRIDESCENT GAMEPAD SKIN
 
-original-1to1.png: exact uploaded artwork, unmodified.
-body-with-stick-cutouts.png: original art with analog caps removed.
-stick-left.png and stick-right.png: cropped analog caps from exact original image.
+Upload controller-body.png, controller-original.png, stick-left.png, stick-right.png and replace style.css in your existing GitHub repository root.
 
-This is a graphics/layer pack, NOT a verified working Gamepad Viewer skin.
-To make it interactive, Gamepad Viewer beta's actual DOM selectors, sizes and
-input-driven stick elements must be measured in browser developer tools.
-The original art includes fixed buttons, so a proper interactive version
-also needs button cutouts and press-state layers. Do not overlay the entire
-original image above moving controls or it will cover their movement.
+CSS URL: https://tridentlabssd.github.io/mapkknowledge/style.css?v=iridescent1
+
+In Gamepad Viewer Beta: Xbox One skin > Edit CSS URL > paste URL > Save. Allow Pages deployment then refresh.
+
+IMPORTANT: This is a first-pass skin; Gamepad Viewer Beta CSS selectors and internal positioning have not been verified against its live DOM. The PNGs are based on the generated artwork and the thumb discs are separate for animation. If thumbs or buttons are offset, send a screenshot and the live DOM selectors to calibrate.
