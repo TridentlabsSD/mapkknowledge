@@ -1,5 +1,5 @@
 'use strict';
-const W=1774,H=887,centers=[[538,270],[1053,451]];
+const W=1774,H=887,centers=[[562,295],[1078,476]];
 const sticks=[document.getElementById('left-stick'),document.getElementById('right-stick')],effects=document.getElementById('effects'),status=document.getElementById('status');
 const params=new URLSearchParams(location.search),debug=params.has('debug');document.body.classList.toggle('debug',debug);
 // Standard Gamepad API button indices; coordinates only position visual highlights.
