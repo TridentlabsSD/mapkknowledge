@@ -1,24 +1,161 @@
-/* MAPKNWLEDGE — safe Gamepad Viewer Beta edit CSS (v2).
-   Keep Gamepad Viewer's own controller DOM and input animations intact.
-   Only place the branded artwork as a background layer.
+/*
+ MAPKNWLEDGE • Gamepad Viewer Xbox One compatible skin • v3
+ Inspired by the structural approach used in Istador/gamepadviewer-skins:
+ artwork is a base layer; GPV-owned .pressed elements and thumbsticks
+ remain responsible for all live controller inputs.
+ Supports Beta "Edit CSS URL" on Xbox One / Xbox One (White),
+ and classic Gamepad Viewer's "Custom CSS URL".
+ Artwork native aspect 1774 x 887 (2:1).
 */
-.controller.edit,
-.controller.xbox.edit,
-.controller.xboxone.edit,
-.controller.custom {
-  position:relative!important;
-  background-image:url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png?v=2")!important;
+html,body { background:transparent!important; overflow:hidden!important; }
+:is(.controller.xbox.edit,.controller.custom) {
+  position:absolute!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  left:50%!important;
+  top:50%!important;
+  margin:0!important;
+  width:min(100vw,200vh)!important;
+  height:min(50vw,100vh)!important;
+  transform:translate(-50%,-50%)!important;
+  overflow:visible!important;
+  background:url("https://tridentlabssd.github.io/mapkknowledge/controller-body.png") center/100% 100% no-repeat!important;
+  opacity:1;
+}
+/* GPV normally hides its input children when unplugged. Show the finished
+   all-in-one artwork in that state so thumbcap cutouts are never empty. */
+:is(.controller.xbox.edit,.controller.custom).disconnected {
+  background-image:url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png")!important;
+}
+:is(.controller.xbox.edit,.controller.custom) .quadrant {display:none!important;}
+/* All control groups use the same coordinate space as the actual artwork;
+   they are NOT a controller input remapping. */
+:is(.controller.xbox.edit,.controller.custom) :is(.abxy,.sticks,.dpad,.arrows,.triggers,.bumpers) {
+  position:absolute!important;
+  box-sizing:border-box!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  z-index:2;
+}
+/* A/B/X/Y: the original image contains the labels, so only show glows
+   when GPV marks an input as pressed. */
+:is(.controller.xbox.edit,.controller.custom) .button {
+  position:absolute!important;
+  box-sizing:border-box!important;
+  display:block;
+  float:none!important;
+  width:6.5%!important;
+  height:13.0%!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:translate(-50%,-50%)!important;
+  margin:0!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle,#ffffffb0 0%,#72e7ff82 27%,#b564ff70 52%,transparent 76%)!important;
+  background-size:100% 100%!important;
+  opacity:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
+:is(.controller.xbox.edit,.controller.custom) .button.pressed {
+  opacity:.96!important;
+  margin:0!important;
+  box-shadow:0 0 12px #54e9ffaa,0 0 20px #a970ff66!important;
+}
+:is(.controller.xbox.edit,.controller.custom) .button.a {left:68.05%!important;top:39.6%!important;}
+:is(.controller.xbox.edit,.controller.custom) .button.b {left:72.85%!important;top:30.7%!important;}
+:is(.controller.xbox.edit,.controller.custom) .button.x {left:63.05%!important;top:30.7%!important;}
+:is(.controller.xbox.edit,.controller.custom) .button.y {left:68.05%!important;top:21.4%!important;}
+/* The independent thumbcap PNGs keep their 3D shading.
+   GPV animates movement on each .stick; do not replace those transforms. */
+:is(.controller.xbox.edit,.controller.custom) .sticks {z-index:5!important;}
+:is(.controller.xbox.edit,.controller.custom) .stick {
+  box-sizing:border-box!important;
+  position:absolute!important;
+  display:block;
+  float:none!important;
+  width:8.5682%!important;
+  height:17.1364%!important;
+  right:auto!important;
+  bottom:auto!important;
+  margin:0;
+  border:0!important;
+  border-radius:50%!important;
+  background-position:center!important;
+  background-size:100% 100%!important;
   background-repeat:no-repeat!important;
-  background-position:center center!important;
-  background-size:contain!important;
+  opacity:1!important;
+  will-change:transform,margin-left,margin-top;
+  box-shadow:0 2px 6px #0009!important;
 }
-/* Hide only the old flat shell, never the whole controller or its inputs. */
-.controller.edit .body,
-.controller.edit .base,
-.controller.custom .body,
-.controller.custom .base {
-  background-color:transparent!important;
-  background-image:none!important;
+:is(.controller.xbox.edit,.controller.custom) .stick.left {
+  left:27.00%!important;top:22.44%!important;
+  background-image:url("https://tridentlabssd.github.io/mapkknowledge/stick-left.png")!important;
 }
-/* Keep default GPV sticks, triggers and buttons visible and functional until
-   the exact Beta DOM is confirmed. */
+:is(.controller.xbox.edit,.controller.custom) .stick.right {
+  left:56.76%!important;top:43.97%!important;
+  background-image:url("https://tridentlabssd.github.io/mapkknowledge/stick-right.png")!important;
+}
+:is(.controller.xbox.edit,.controller.custom) .stick.pressed {
+  filter:brightness(1.2)!important;
+  box-shadow:0 0 12px #ae74ff99,0 3px 8px #000c!important;
+}
+/* D-pad: light the pressed direction over the baked-in D-pad shape. */
+:is(.controller.xbox.edit,.controller.custom) .face {
+  position:absolute!important;
+  display:block;
+  box-sizing:border-box!important;
+  float:none!important;
+  width:4.6%!important;height:9.2%!important;
+  right:auto!important;bottom:auto!important;
+  transform:translate(-50%,-50%)!important;
+  background:radial-gradient(circle,#fff7,#87dfff66 48%,transparent 76%)!important;
+  border-radius:35%!important;
+  opacity:0!important;
+}
+:is(.controller.xbox.edit,.controller.custom) .face.pressed {opacity:.9!important;}
+:is(.controller.xbox.edit,.controller.custom) .face.up {left:38.2%!important;top:45.7%!important;}
+:is(.controller.xbox.edit,.controller.custom) .face.down {left:38.2%!important;top:57.6%!important;}
+:is(.controller.xbox.edit,.controller.custom) .face.left {left:34.9%!important;top:51.6%!important;}
+:is(.controller.xbox.edit,.controller.custom) .face.right {left:41.5%!important;top:51.6%!important;}
+/* Back/View and Start/Menu */
+:is(.controller.xbox.edit,.controller.custom) :is(.back,.start,.meta) {
+  position:absolute!important;
+  display:block;
+  box-sizing:border-box!important;
+  float:none!important;
+  width:4.8%!important;height:9.6%!important;
+  right:auto!important;bottom:auto!important;
+  transform:translate(-50%,-50%)!important;
+  margin:0!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle,#ffffffa0,#a16cff77 43%,transparent 76%)!important;
+  opacity:0!important;
+}
+:is(.controller.xbox.edit,.controller.custom) .back {left:43.35%!important;top:30.9%!important;}
+:is(.controller.xbox.edit,.controller.custom) .start {left:54.35%!important;top:30.9%!important;}
+:is(.controller.xbox.edit,.controller.custom) .meta {left:48.75%!important;top:17.2%!important;}
+:is(.controller.xbox.edit,.controller.custom) :is(.back,.start,.meta).pressed {opacity:.95!important;}
+/* Bumpers and triggers: overlay the shoulders without showing stock sprites.
+   Trigger opacity is intentionally NOT !important: GPV may set analog travel
+   using the inline opacity of these elements. */
+:is(.controller.xbox.edit,.controller.custom) :is(.bumper,.trigger) {
+  position:absolute!important;
+  box-sizing:border-box!important;
+  display:block;
+  float:none!important;
+  right:auto!important;bottom:auto!important;
+  width:17%!important;height:10%!important;
+  transform:none!important;
+  background:radial-gradient(ellipse at center,#6ce9ff99,#ad69ff44 42%,transparent 74%)!important;
+  border-radius:40%!important;
+  opacity:0;
+}
+:is(.controller.xbox.edit,.controller.custom) .bumper {top:9%!important;}
+:is(.controller.xbox.edit,.controller.custom) .trigger {top:1%!important;}
+:is(.controller.xbox.edit,.controller.custom) :is(.bumper,.trigger).left {left:19%!important;}
+:is(.controller.xbox.edit,.controller.custom) :is(.bumper,.trigger).right {left:64%!important;}
+:is(.controller.xbox.edit,.controller.custom) :is(.bumper,.trigger).pressed {opacity:1!important;}
+/* Preserve Gamepad Viewer's disconnected mode, but keep our base art visible. */
+:is(.controller.xbox.edit,.controller.custom).disconnected {opacity:.75!important;}
