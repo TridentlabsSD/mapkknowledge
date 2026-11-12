@@ -107,3 +107,17 @@
     drop-shadow(0 0 8px #8e8cff)
     drop-shadow(0 0 12px #53e5ff) !important;
 }
+
+/* TEMPORARY CENTERING TEST */
+.controller.edit {
+  position: fixed !important;
+  left: 50% !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  transform: translate(-50%, -50%) !important;
+  width: 750px !important;
+  height: 375px !important;
+  z-index: 9999 !important;
+}
