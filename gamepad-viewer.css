@@ -1,7 +1,7 @@
 /*
  MAPKNWLEDGE • Gamepad Viewer Xbox One compatible skin • v3
  Inspired by the structural approach used in Istador/gamepadviewer-skins:
- artwork is a base layer; GPV-owned .pressed elements and thumbsticks
+ approved controller-clean artwork is a base layer; GPV-owned .pressed elements and thumbsticks
  remain responsible for all live controller inputs.
  Supports Beta "Edit CSS URL" on Xbox One / Xbox One (White),
  and classic Gamepad Viewer's "Custom CSS URL".
@@ -19,7 +19,7 @@ html,body { background:transparent!important; overflow:hidden!important; }
   height:min(50vw,100vh)!important;
   transform:translate(-50%,-50%)!important;
   overflow:visible!important;
-  background:url("https://tridentlabssd.github.io/mapkknowledge/controller-body.png") center/100% 100% no-repeat!important;
+  background:url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png") center/100% 100% no-repeat!important;
   opacity:1;
 }
 /* GPV normally hides its input children when unplugged. Show the finished
