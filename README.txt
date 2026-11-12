@@ -1,16 +1,12 @@
-MAPKNWLEDGE - RADAR VIPER XBOX GAMEPAD VIEWER SKIN
+MAPKNWLEDGE 1:1 CONTROLLER ASSET PACK
 
-This is a functional CSS *overlay* for GamepadViewer's existing Xbox skin.
-The sticks and buttons still move using GamepadViewer's own input tracking.
+original-1to1.png: exact uploaded artwork, unmodified.
+body-with-stick-cutouts.png: original art with analog caps removed.
+stick-left.png and stick-right.png: cropped analog caps from exact original image.
 
-INSTALL (one-time hosting step):
-1. Create a public GitHub repository and upload style.css.
-2. Enable GitHub Pages in repository Settings > Pages (Deploy from branch: main / root).
-3. Your CSS URL becomes https://YOURNAME.github.io/REPOSITORY/style.css
-4. On gamepadviewer.com, choose Xbox One skin and player 1.
-5. Paste the public URL into **Edit CSS URL** (not Custom CSS URL).
-6. Generate the viewer URL and add it as a Browser Source in Streamlabs/OBS.
-
-If using the browser-source Custom CSS field instead, paste the text of style.css there, but that can differ across versions.
-
-NOTE: This CSS intentionally keeps the site's original Xbox controller body so all controls stay aligned. It provides a monochrome styling and a small radar-viper emblem. It is not the earlier photorealistic illustration, and it has not been tested against a live Xbox controller in this environment.
+This is a graphics/layer pack, NOT a verified working Gamepad Viewer skin.
+To make it interactive, Gamepad Viewer beta's actual DOM selectors, sizes and
+input-driven stick elements must be measured in browser developer tools.
+The original art includes fixed buttons, so a proper interactive version
+also needs button cutouts and press-state layers. Do not overlay the entire
+original image above moving controls or it will cover their movement.
