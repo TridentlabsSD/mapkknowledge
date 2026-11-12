@@ -1,23 +1,24 @@
-# MapKnwledge V2 - independent controller overlay
+# MAPKNWLEDGE controller overlay
 
-This is a **new self-contained overlay** that reads the browser's Gamepad API. It does **not** use Gamepad Viewer Beta's CSS URL field, because that integration was clipping the image and moving analog sticks outside the body.
+This repository hosts a **standalone browser Gamepad API overlay**, not a Gamepad Viewer Beta custom CSS skin. Do **not** paste the website URL into Beta's **Edit CSS URL** field; that field only accepts stylesheets targeting Beta's own DOM.
 
-## GitHub installation
-1. In `TridentlabsSD/mapkknowledge`, select **Add file > Upload files**.
-2. Upload the contents of this package **inside a folder named `mapknwledge-v2`**. GitHub's web uploader may not preserve the folder if you select files individually; drag the complete folder into the upload area, or create `mapknwledge-v2/index.html` using **Add file > Create new file** first, then upload the remaining files into that folder.
-3. Commit. Existing root files remain untouched.
-4. Under Settings > Pages, use `main` and `/ (root)` (already configured).
-5. Open `https://tridentlabssd.github.io/mapkknowledge/mapknwledge-v2/`.
-6. Plug in your Xbox controller, press a button, and test sticks/buttons. Browser Gamepad API typically requires interaction before gamepad access.
+## URLs
+- Overlay: https://tridentlabssd.github.io/mapkknowledge/
+- Debug preview: https://tridentlabssd.github.io/mapkknowledge/?debug=1
 
-## Streaming
-Try this page in an OBS / Streamlabs browser source. **Browser source gamepad access depends on the embedded browser and may not work.** If inputs don't animate in OBS, open the page in Chrome with the controller connected and capture that window with a transparent/background-aware capture method instead. Confirm on the streaming machine before going live.
+## Use
+1. Open the overlay in Chrome on the PC with the controller connected.
+2. Press a controller button to activate browser gamepad access.
+3. Move both sticks and press A/B/X/Y, D-pad, triggers and bumpers.
+4. In debug preview, WASD controls left stick, arrow keys control right, and 1–4 preview A/B/X/Y **when no controller is connected**.
+5. Add the overlay URL as a Streamlabs/OBS browser source. Browser-source Gamepad API support varies; test input recognition before relying on it live. If unsupported, capture the Chrome overlay window instead.
 
-## Preview without controller
-Append `?debug=1` to the page URL. WASD moves left stick, arrow keys move right, 1-4 light up ABXY (preview only).
+## Artwork
+The page uses `controller-body.png`, `stick-left.png`, and `stick-right.png` from this repository. Keep these filenames in the repository root. Image dimensions and coordinates are calibrated for the 1774×887 artwork; input glow positions are approximate.
 
 ## Notes
-- Uses the supplied iridescent art and transparent cutout body.
-- Analog caps move independently, no 1774px fixed CSS element or conflicting transforms.
-- Button highlight positions are approximate, and the real controller input mapping depends on browser/driver.
-- This package has been checked for file presence and code syntax, but **not** tested against your physical controller or streaming browser.
+- The page background is transparent in normal mode.
+- The controller scales to fit its viewport without changing aspect ratio.
+- Standard Gamepad API button indices are used. Nonstandard devices may need remapping.
+- The old Gamepad Viewer CSS experiments are not required for this standalone overlay.
+- Live controller input and OBS compatibility must be checked on the actual streaming PC.
