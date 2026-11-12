@@ -1,24 +1,14 @@
-# MAPKNWLEDGE controller overlay
+# MAPKNWLEDGE live controller overlay
 
-This repository hosts a **standalone browser Gamepad API overlay**, not a Gamepad Viewer Beta custom CSS skin. Do **not** paste the website URL into Beta's **Edit CSS URL** field; that field only accepts stylesheets targeting Beta's own DOM.
+Standalone browser Gamepad API overlay, **not** a Gamepad Viewer Beta custom CSS skin.
 
-## URLs
-- Overlay: https://tridentlabssd.github.io/mapkknowledge/
-- Debug preview: https://tridentlabssd.github.io/mapkknowledge/?debug=1
+- Live: https://tridentlabssd.github.io/mapkknowledge/
+- Diagnostics: https://tridentlabssd.github.io/mapkknowledge/?debug=1
 
-## Use
-1. Open the overlay in Chrome on the PC with the controller connected.
-2. Press a controller button to activate browser gamepad access.
-3. Move both sticks and press A/B/X/Y, D-pad, triggers and bumpers.
-4. In debug preview, WASD controls left stick, arrow keys control right, and 1–4 preview A/B/X/Y **when no controller is connected**.
-5. Add the overlay URL as a Streamlabs/OBS browser source. Browser-source Gamepad API support varies; test input recognition before relying on it live. If unsupported, capture the Chrome overlay window instead.
+Uses the approved controller-clean.png artwork, preserving the established responsive sizing. Standard Xbox Gamepad API button indices 0–16 and axes 0–3 drive input. No custom input remapping is performed. Artwork hotspot coordinates are visual positions only. Trigger glows reflect analog button pressure where exposed by the browser.
 
-## Artwork
-The page uses `controller-body.png`, `stick-left.png`, and `stick-right.png` from this repository. Keep these filenames in the repository root. Image dimensions and coordinates are calibrated for the 1774×887 artwork; input glow positions are approximate.
+Open diagnostics in Chrome on the gaming PC, press a controller button to grant access, and check each input and axis. Stick clicks are L3/R3. The Home button may not be exposed by the browser. Nonstandard mapping may need device-specific handling; diagnostics warns when mapping isn't standard. If multiple pads are connected, ?pad=0 (or another index) selects one.
 
-## Notes
-- The page background is transparent in normal mode.
-- The controller scales to fit its viewport without changing aspect ratio.
-- Standard Gamepad API button indices are used. Nonstandard devices may need remapping.
-- The old Gamepad Viewer CSS experiments are not required for this standalone overlay.
-- Live controller input and OBS compatibility must be checked on the actual streaming PC.
+Debug keyboard preview when disconnected: WASD left stick, arrow keys right stick, 1–4 A/B/X/Y. The live overlay background is transparent. OBS/Streamlabs embedded browser gamepad access varies; if it doesn't detect the controller, capture the Chrome window instead.
+
+**Physical testing is still required** to confirm every control and hotspot lines up on the user's controller. The GitHub code cannot independently validate a connected gamepad.
