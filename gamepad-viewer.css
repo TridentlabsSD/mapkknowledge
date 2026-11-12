@@ -1,0 +1,40 @@
+/* MAPKNWLEDGE Gamepad Viewer Xbox One edit stylesheet.
+   Visual-only: Gamepad Viewer owns all input mapping and state.
+   Use in Beta > Skin > Edit CSS URL; select Xbox One.
+   This targets both classic GPV and common Beta class names.
+*/
+.controller.edit,.controller.custom,.controller.xbox.edit,.gamepad.edit {
+  width:887px!important;height:443.5px!important;
+  position:relative!important;
+  background:url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png") center center/100% 100% no-repeat!important;
+  overflow:visible!important;
+}
+/* GPV classic controller is centered using negative margins. */
+.controller.edit,.controller.custom {margin-left:-443.5px!important;margin-top:-221.75px!important;}
+/* Hide original default body layers, not functional controls. */
+.controller.edit .body,.controller.custom .body,.controller.edit .base,.controller.custom .base {background:transparent!important;}
+/* Hide stock artwork but preserve Gamepad Viewer's live input-driven elements. */
+.controller.edit .button,.controller.edit .stick,.controller.edit .trigger,.controller.edit .bumper,.controller.edit .face,.controller.edit .back,
+.controller.custom .button,.controller.custom .stick,.controller.custom .trigger,.controller.custom .bumper,.controller.custom .face,.controller.custom .back {
+ background-image:none!important;
+}
+/* Inputs overlay artwork in native visual coordinates (1774x887 -> 887x443.5). */
+.controller.edit .abxy,.controller.custom .abxy {position:absolute!important;left:621px!important;top:80px!important;width:240px!important;height:180px!important;}
+.controller.edit .abxy .button,.controller.custom .abxy .button {position:absolute!important;width:54px!important;height:54px!important;border-radius:50%!important;opacity:0;box-shadow:none!important;transform:none!important;}
+.controller.edit .abxy .a,.controller.custom .abxy .a {left:0!important;top:99px!important;}
+.controller.edit .abxy .b,.controller.custom .abxy .b {left:43px!important;top:57px!important;}
+.controller.edit .abxy .x,.controller.custom .abxy .x {left:-45px!important;top:58px!important;}
+.controller.edit .abxy .y,.controller.custom .abxy .y {left:0!important;top:14px!important;}
+.controller.edit .button.pressed,.controller.custom .button.pressed,
+.controller.edit .button.active,.controller.custom .button.active {opacity:1!important;background:radial-gradient(circle,#ffffff8a 0%,#7eeaff66 38%,#bb68ff44 64%,transparent 74%)!important;box-shadow:0 0 11px #70eaffaa!important;}
+/* Use GPV's existing thumbstick movement and press state. */
+.controller.edit .sticks,.controller.custom .sticks {position:absolute!important;left:270px!important;top:140px!important;width:317px!important;height:105px!important;}
+.controller.edit .stick,.controller.custom .stick {position:absolute!important;width:78px!important;height:78px!important;border-radius:50%!important;background:radial-gradient(circle at 34% 28%,#4b5059,#17191e 46%,#050608 78%)!important;border:2px solid #4e4d55!important;box-shadow:inset 0 2px 6px #ffffff55,inset 0 -8px 12px #000,0 3px 8px #000b!important;opacity:1!important;}
+.controller.edit .stick.left,.controller.custom .stick.left {left:0!important;top:0!important;}
+.controller.edit .stick.right,.controller.custom .stick.right {left:238px!important;top:91px!important;}
+.controller.edit .stick.pressed,.controller.custom .stick.pressed {box-shadow:inset 0 2px 6px #ffffff66,0 0 13px #9b6cff!important;}
+/* The remaining inputs retain their existing GPV mechanics; avoid forcing
+   custom mapping or overriding transforms that animate triggers and sticks. */
+.controller.edit .dpad,.controller.custom .dpad {position:absolute!important;left:204px!important;top:201px!important;}
+.controller.edit .bumpers,.controller.custom .bumpers,
+.controller.edit .triggers,.controller.custom .triggers {pointer-events:none!important;}
