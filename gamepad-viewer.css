@@ -1,186 +1,37 @@
 /*
- MAPKNWLEDGE • Gamepad Viewer Xbox One compatible skin • v3
- Inspired by the structural approach used in Istador/gamepadviewer-skins:
- approved controller-clean artwork is a base layer; GPV-owned .pressed elements and thumbsticks
- remain responsible for all live controller inputs.
- Supports Beta "Edit CSS URL" on Xbox One / Xbox One (White),
- and classic Gamepad Viewer's "Custom CSS URL".
- Artwork native aspect 1774 x 887 (2:1).
+ MAPKNWLEDGE / Gamepad Viewer Beta — native-control-compatible v6
+ EDIT CSS (Xbox One). Only change the visual skin; GPV owns geometry,
+ stick transforms, trigger travel, button states and input detection.
+ Avoid any positioning/transform/size overrides on GPV's control nodes.
 */
-html,body { background:transparent!important; overflow:hidden!important; }
-:is(.controller.xbox.edit,.controller.custom) {
-  position:absolute!important;
-  display:block!important;
-  box-sizing:border-box!important;
-  left:50%!important;
-  top:50%!important;
-  margin:0!important;
-  width:min(100vw,200vh)!important;
-  height:min(50vw,100vh)!important;
-  transform:translate(-50%,-50%)!important;
-  overflow:visible!important;
-  background:url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png") center/100% 100% no-repeat!important;
-  opacity:1;
-}
-/* Keep a clear indication when Gamepad Viewer has no controller input.
-   The artwork alone is not proof of a gamepad connection. */
-:is(.controller.xbox.edit,.controller.custom).disconnected::after {
-  content:"GAMEPAD NOT CONNECTED — press a controller button in this browser";
-  position:absolute;
-  z-index:50;
-  left:50%;
-  bottom:-6%;
-  transform:translateX(-50%);
-  white-space:nowrap;
-  padding:5px 12px;
-  font:600 12px/1.4 Arial,sans-serif;
-  color:#fff;
-  background:#971b49ed;
-  border-radius:6px;
-  pointer-events:none;
-}
-:is(.controller.xbox.edit,.controller.custom) .quadrant {display:none!important;}
-/* All control groups use the same coordinate space as the actual artwork;
-   they are NOT a controller input remapping. */
-:is(.controller.xbox.edit,.controller.custom) :is(.abxy,.sticks,.dpad,.arrows,.triggers,.bumpers) {
-  position:absolute!important;
-  box-sizing:border-box!important;
-  inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  z-index:2;
-}
-/* A/B/X/Y: the original image contains the labels, so only show glows
-   when GPV marks an input as pressed. */
-:is(.controller.xbox.edit,.controller.custom) .button {
-  position:absolute!important;
-  box-sizing:border-box!important;
-  display:block;
-  float:none!important;
-  width:6.5%!important;
-  height:13.0%!important;
-  right:auto!important;
-  bottom:auto!important;
-  transform:translate(-50%,-50%)!important;
-  margin:0!important;
-  border-radius:50%!important;
-  background:radial-gradient(circle,#ffffffb0 0%,#72e7ff82 27%,#b564ff70 52%,transparent 76%)!important;
-  background-size:100% 100%!important;
-  opacity:0!important;
-  box-shadow:none!important;
-  filter:none!important;
-}
-:is(.controller.xbox.edit,.controller.custom) .button.pressed {
-  opacity:.96!important;
-  margin:0!important;
-  box-shadow:0 0 12px #54e9ffaa,0 0 20px #a970ff66!important;
-}
-:is(.controller.xbox.edit,.controller.custom) .button.a {left:68.05%!important;top:39.6%!important;}
-:is(.controller.xbox.edit,.controller.custom) .button.b {left:72.85%!important;top:30.7%!important;}
-:is(.controller.xbox.edit,.controller.custom) .button.x {left:63.05%!important;top:30.7%!important;}
-:is(.controller.xbox.edit,.controller.custom) .button.y {left:68.05%!important;top:21.4%!important;}
-/* The independent thumbcap PNGs keep their 3D shading.
-   GPV animates movement on each .stick; do not replace those transforms. */
-:is(.controller.xbox.edit,.controller.custom) .sticks {z-index:5!important;}
-:is(.controller.xbox.edit,.controller.custom) .stick {
-  box-sizing:border-box!important;
-  position:absolute!important;
-  display:block;
-  float:none!important;
-  width:8.5682%!important;
-  height:17.1364%!important;
-  right:auto!important;
-  bottom:auto!important;
-  margin:0;
-  border:0!important;
-  border-radius:50%!important;
-  background-position:center!important;
-  background-size:100% 100%!important;
+.controller.xbox.edit,
+.controller.xbox.white.edit {
+  background-image:url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png")!important;
   background-repeat:no-repeat!important;
-  opacity:1!important;
-  will-change:transform,margin-left,margin-top;
-  box-shadow:0 2px 6px #0009!important;
+  background-position:center center!important;
+  background-size:100% 100%!important;
 }
-:is(.controller.xbox.edit,.controller.custom) .stick.left {
-  left:27.00%;top:22.44%;
-  background-image:url("https://tridentlabssd.github.io/mapkknowledge/stick-left.png")!important;
+/* Keep live Gamepad Viewer control nodes, their layout, and movement rules.
+   Highlight existing pressed states using visual-only properties. */
+.controller.xbox.edit .button.pressed,
+.controller.xbox.edit .face.pressed,
+.controller.xbox.edit .back.pressed,
+.controller.xbox.edit .start.pressed,
+.controller.xbox.edit .meta.pressed,
+.controller.xbox.edit .bumper.pressed,
+.controller.xbox.edit .trigger.pressed,
+.controller.xbox.white.edit .button.pressed,
+.controller.xbox.white.edit .face.pressed,
+.controller.xbox.white.edit .back.pressed,
+.controller.xbox.white.edit .start.pressed,
+.controller.xbox.white.edit .meta.pressed,
+.controller.xbox.white.edit .bumper.pressed,
+.controller.xbox.white.edit .trigger.pressed {
+  filter:brightness(1.55) saturate(1.5) drop-shadow(0 0 7px #6ddfff)!important;
 }
-:is(.controller.xbox.edit,.controller.custom) .stick.right {
-  left:56.76%;top:43.97%;
-  background-image:url("https://tridentlabssd.github.io/mapkknowledge/stick-right.png")!important;
-}
-:is(.controller.xbox.edit,.controller.custom) .stick.pressed {
-  filter:brightness(1.2)!important;
-  box-shadow:0 0 12px #ae74ff99,0 3px 8px #000c!important;
-}
-/* D-pad: light the pressed direction over the baked-in D-pad shape. */
-:is(.controller.xbox.edit,.controller.custom) .face {
-  position:absolute!important;
-  display:block;
-  box-sizing:border-box!important;
-  float:none!important;
-  width:4.6%!important;height:9.2%!important;
-  right:auto!important;bottom:auto!important;
-  transform:translate(-50%,-50%)!important;
-  background:radial-gradient(circle,#fff7,#87dfff66 48%,transparent 76%)!important;
-  border-radius:35%!important;
-  opacity:0!important;
-}
-:is(.controller.xbox.edit,.controller.custom) .face.pressed {opacity:.9!important;}
-:is(.controller.xbox.edit,.controller.custom) .face.up {left:38.2%!important;top:45.7%!important;}
-:is(.controller.xbox.edit,.controller.custom) .face.down {left:38.2%!important;top:57.6%!important;}
-:is(.controller.xbox.edit,.controller.custom) .face.left {left:34.9%!important;top:51.6%!important;}
-:is(.controller.xbox.edit,.controller.custom) .face.right {left:41.5%!important;top:51.6%!important;}
-/* Back/View and Start/Menu */
-:is(.controller.xbox.edit,.controller.custom) :is(.back,.start,.meta) {
-  position:absolute!important;
-  display:block;
-  box-sizing:border-box!important;
-  float:none!important;
-  width:4.8%!important;height:9.6%!important;
-  right:auto!important;bottom:auto!important;
-  transform:translate(-50%,-50%)!important;
-  margin:0!important;
-  border-radius:50%!important;
-  background:radial-gradient(circle,#ffffffa0,#a16cff77 43%,transparent 76%)!important;
-  opacity:0!important;
-}
-:is(.controller.xbox.edit,.controller.custom) .back {left:43.35%!important;top:30.9%!important;}
-:is(.controller.xbox.edit,.controller.custom) .start {left:54.35%!important;top:30.9%!important;}
-:is(.controller.xbox.edit,.controller.custom) .meta {left:48.75%!important;top:17.2%!important;}
-:is(.controller.xbox.edit,.controller.custom) :is(.back,.start,.meta).pressed {opacity:.95!important;}
-/* Bumpers and triggers: overlay the shoulders without showing stock sprites.
-   Trigger opacity is intentionally NOT !important: GPV may set analog travel
-   using the inline opacity of these elements. */
-:is(.controller.xbox.edit,.controller.custom) :is(.bumper,.trigger) {
-  position:absolute!important;
-  box-sizing:border-box!important;
-  display:block;
-  float:none!important;
-  right:auto!important;bottom:auto!important;
-  width:17%!important;height:10%!important;
-  transform:none!important;
-  background:radial-gradient(ellipse at center,#6ce9ff99,#ad69ff44 42%,transparent 74%)!important;
-  border-radius:40%!important;
-  opacity:0;
-}
-:is(.controller.xbox.edit,.controller.custom) .bumper {top:9%!important;}
-:is(.controller.xbox.edit,.controller.custom) .trigger {top:1%!important;}
-:is(.controller.xbox.edit,.controller.custom) :is(.bumper,.trigger).left {left:19%!important;}
-:is(.controller.xbox.edit,.controller.custom) :is(.bumper,.trigger).right {left:64%!important;}
-:is(.controller.xbox.edit,.controller.custom) :is(.bumper,.trigger).pressed {opacity:1!important;}
-/* Preserve Gamepad Viewer's disconnected mode, but keep our base art visible. */
-:is(.controller.xbox.edit,.controller.custom).disconnected {opacity:.75!important;}
-
-
-/* Input states are supplied by Gamepad Viewer, not this stylesheet.
-   Don't override JS-provided stick offsets or animate a whole controller. */
-:is(.controller.xbox.edit,.controller.custom) .stick {
- transition:filter 60ms,box-shadow 60ms!important;
-}
-:is(.controller.xbox.edit,.controller.custom) .button.pressed,
-:is(.controller.xbox.edit,.controller.custom) .face.pressed,
-:is(.controller.xbox.edit,.controller.custom) :is(.back,.start,.meta,.bumper,.trigger).pressed {
- opacity:1!important;
- filter:brightness(1.2)!important;
+/* Keep the thumbsticks' GPV-controlled offsets / transforms completely
+   untouched; adjust only their lighting when clicked. */
+.controller.xbox.edit .stick.pressed,
+.controller.xbox.white.edit .stick.pressed {
+  filter:brightness(1.4) drop-shadow(0 0 7px #b675ff)!important;
 }
