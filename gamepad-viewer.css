@@ -1,145 +1,152 @@
 /*
- MAPKNWLEDGE Xbox One Gamepad Viewer skin — template rebuild v7.
- Based on the original Gamepad Viewer Xbox One CSS structure:
- .controller.xbox, .sticks > .stick.left/.right, .abxy > .button,
- .dpad > .face, .arrows, .triggers and .bumpers.
- Gamepad Viewer itself owns gamepad detection, mapping, .pressed classes,
- trigger pressure and thumbstick displacement. NO JavaScript remapping.
- Artwork coordinate system: 1774 x 887.
+  MAPKNWLEDGE — Xbox One skin for GamePad Viewer Beta (v10)
+  GamePad Viewer Beta: Skin = Xbox One -> Edit CSS URL
+    https://tridentlabssd.github.io/mapkknowledge/gamepad-viewer.css?v=10
+
+  Works the same way as GPV's default Xbox skin:
+  * GPV does all input handling: .pressed on buttons, inline margin + rotate on
+    .stick, inline opacity (pressure) on .trigger. None of that is overridden here,
+    nor the controller's inline transform (GPV Scale + centring). No !important.
+  * Every graphic is cut from the approved controller-clean.png (no drop shadow).
+  * Thumbsticks are GPV's own default Xbox sticks, centred in the art's rings.
+  * A/B/X/Y, View, Menu: always drawn, light up and sink when pressed (like default).
+  * D-pad, LB/RB, Home: lit overlay when pressed. LT/RT: glow fades in with pressure.
 */
-html,body {background:transparent!important;overflow:hidden!important}
 
-/* The .edit class is added by the "Edit CSS URL" option in Beta.
-   The .custom class covers the classic custom-skin mode as well. */
-.controller.xbox.edit,.controller.custom {
-  position:absolute!important;
-  display:block!important;
-  box-sizing:border-box!important;
-  left:50%!important;top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  width:min(96vw,176vh)!important;
-  height:auto!important;
-  aspect-ratio:2 / 1!important;
-  margin:0!important;
-  background:url("https://tridentlabssd.github.io/mapkknowledge/controller-body.png") center center / 100% 100% no-repeat!important;
-  overflow:visible!important;
-  opacity:1!important;
+/* ---------- body ---------- */
+.controller.xbox.edit {
+  width: 662px;
+  height: 469px;
+  background: url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png?v=10") -112px 25px / 887px 443.5px no-repeat;
 }
-/* Give a visual indication when no controller is connected, without
-   changing the Gamepad Viewer detection or its event listeners. */
-.controller.xbox.edit.disconnected,
-.controller.custom.disconnected {
-  background-image:url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png")!important;
-  opacity:.65!important;
-}
-.controller.xbox.edit .quadrant,.controller.custom .quadrant {display:none!important}
+.controller.xbox.edit.disconnected { opacity: 0.6; }
 
-/* Button layers use image-relative percentages, no controller remapping. */
-.controller.xbox.edit .abxy,.controller.custom .abxy,
-.controller.xbox.edit .dpad,.controller.custom .dpad,
-.controller.xbox.edit .arrows,.controller.custom .arrows,
-.controller.xbox.edit .triggers,.controller.custom .triggers,
-.controller.xbox.edit .bumpers,.controller.custom .bumpers {
-  position:absolute!important;inset:0!important;
-  width:100%!important;height:100%!important;
-  box-sizing:border-box!important;
+/* ---------- layers: plain 662x469 display-pixel layers ---------- */
+.controller.xbox.edit > div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 662px;
+  height: 469px;
+  transform: none;
 }
-.controller.xbox.edit .abxy,.controller.custom .abxy {z-index:7}
-.controller.xbox.edit .button,.controller.custom .button {
-  display:block;position:absolute!important;box-sizing:border-box!important;
-  float:none!important;right:auto!important;bottom:auto!important;
-  width:5.8%!important;height:11.6%!important;
-  margin:0!important;transform:translate(-50%,-50%)!important;
-  border-radius:50%!important;
-  background:radial-gradient(circle,rgba(255,255,255,.8),rgba(71,226,255,.65) 37%,rgba(179,104,255,.5) 58%,transparent 75%) center / 100% 100% no-repeat!important;
-  box-shadow:none!important;
-  opacity:0!important;
-  transition:opacity 45ms!important;
-}
-.controller.xbox.edit .button.pressed,.controller.custom .button.pressed {
-  opacity:1!important;box-shadow:0 0 12px #79e6ff88!important;
-}
-.controller.xbox.edit .button.a,.controller.custom .button.a {left:68.0%!important;top:40.2%!important}
-.controller.xbox.edit .button.b,.controller.custom .button.b {left:72.95%!important;top:30.8%!important}
-.controller.xbox.edit .button.x,.controller.custom .button.x {left:62.85%!important;top:30.9%!important}
-.controller.xbox.edit .button.y,.controller.custom .button.y {left:68.05%!important;top:21.6%!important}
+.controller.xbox.edit .quadrant, .controller.xbox.edit .touchpad, .controller.xbox.edit .wheels, .controller.xbox.edit .fstick,
+.controller.xbox.edit .trigger-button, .controller.xbox.edit .clear { display: none; }
 
-/* GPV's own analog movement works on the .stick nodes.  Position
-   the .sticks group using the artwork, but NEVER override their
-   runtime margin, transform or animation properties. */
-.controller.xbox.edit .sticks,.controller.custom .sticks {
-  position:absolute!important;box-sizing:border-box!important;
-  width:37.60%!important;height:37.43%!important;
-  left:26.16%!important;top:21.87%!important;
-  z-index:8!important;
+/* parts cut from the artwork */
+.controller.xbox.edit .button, .controller.xbox.edit .back, .controller.xbox.edit .start, .controller.xbox.edit .face, .controller.xbox.edit .bumper {
+  position: absolute;
+  float: none;
+  right: auto;
+  bottom: auto;
+  margin: 0;
+  transform: none;
+  background-image: url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png?v=10");
+  background-size: 887px 443.5px;
+  background-repeat: no-repeat;
 }
-.controller.xbox.edit .stick,.controller.custom .stick {
-  position:absolute!important;display:block;
-  float:none!important;box-sizing:border-box!important;
-  width:22.79%!important;height:45.78%!important;
-  border:0!important; border-radius:50%!important;
-  background-position:center!important;background-repeat:no-repeat!important;
-  background-size:100% 100%!important;
-  box-shadow:0 3px 8px rgba(0,0,0,.8)!important;
-  opacity:1!important;
+.controller.xbox.edit .button, .controller.xbox.edit .back, .controller.xbox.edit .start { border-radius: 50%; opacity: 1; }
+
+/* dark sockets under the moving parts, so nothing printed shows through */
+.controller.xbox.edit > div.abxy::before, .controller.xbox.edit > div.arrows::before, .controller.xbox.edit > div.sticks::before {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
-.controller.xbox.edit .stick.left,.controller.custom .stick.left {
-  left:0;top:0;
-  background-image:url("https://tridentlabssd.github.io/mapkknowledge/stick-left.png")!important;
+.controller.xbox.edit > div.abxy::before {
+  background:
+    radial-gradient(circle 27.5px at 506.8px 207.9px, #050507 98%, transparent 100%),
+    radial-gradient(circle 27.5px at 550.55px 165.85px, #050507 98%, transparent 100%),
+    radial-gradient(circle 27.5px at 461.25px 165.7px, #050507 98%, transparent 100%),
+    radial-gradient(circle 27.5px at 506.65px 123.55px, #050507 98%, transparent 100%);
 }
-.controller.xbox.edit .stick.right,.controller.custom .stick.right {
-  left:77.21%;top:54.22%;
-  background-image:url("https://tridentlabssd.github.io/mapkknowledge/stick-right.png")!important;
+.controller.xbox.edit > div.arrows::before {
+  background:
+    radial-gradient(circle 18.5px at 281.8px 164.8px, #050507 98%, transparent 100%),
+    radial-gradient(circle 18.5px at 383.1px 164.75px, #050507 98%, transparent 100%);
 }
-.controller.xbox.edit .stick.pressed,.controller.custom .stick.pressed {
-  filter:brightness(1.3) drop-shadow(0 0 6px #ae76ff)!important;
-  background-position:center!important;
+.controller.xbox.edit > div.sticks::before {
+  background:
+    radial-gradient(circle 44px at 165.3px 162.95px, #0c0c0f 0, #040405 92%, transparent 100%),
+    radial-gradient(circle 44px at 429.75px 256.8px, #0c0c0f 0, #040405 92%, transparent 100%);
 }
 
-/* D-pad — illuminate existing image when GPV adds .pressed. */
-.controller.xbox.edit .face,.controller.custom .face {
-  position:absolute!important;display:block;float:none!important;
-  right:auto!important;bottom:auto!important;
-  transform:translate(-50%,-50%)!important;
-  background:radial-gradient(ellipse,#ffffffaa,#8cdfff77 45%,transparent 77%) center / 100% 100% no-repeat!important;
-  opacity:0!important;box-shadow:none!important;border-radius:25%!important;
+/* ---------- A B X Y, View, Menu ---------- */
+.controller.xbox.edit .button.a { left: 478.8px; top: 179.9px; width: 56px; height: 56px; background-position: -590.8px -154.9px; }
+.controller.xbox.edit .button.a.pressed { background-position: 0 0, -590.8px -154.9px; }
+.controller.xbox.edit .button.b { left: 522.55px; top: 137.85px; width: 56px; height: 56px; background-position: -634.55px -112.85px; }
+.controller.xbox.edit .button.b.pressed { background-position: 0 0, -634.55px -112.85px; }
+.controller.xbox.edit .button.x { left: 433.25px; top: 137.7px; width: 56px; height: 56px; background-position: -545.25px -112.7px; }
+.controller.xbox.edit .button.x.pressed { background-position: 0 0, -545.25px -112.7px; }
+.controller.xbox.edit .button.y { left: 478.65px; top: 95.55px; width: 56px; height: 56px; background-position: -590.65px -70.55px; }
+.controller.xbox.edit .button.y.pressed { background-position: 0 0, -590.65px -70.55px; }
+.controller.xbox.edit .back { left: 262.8px; top: 145.8px; width: 38px; height: 38px; background-position: -374.8px -120.8px; }
+.controller.xbox.edit .back.pressed { background-position: 0 0, -374.8px -120.8px; }
+.controller.xbox.edit .start { left: 364.1px; top: 145.75px; width: 38px; height: 38px; background-position: -476.1px -120.75px; }
+.controller.xbox.edit .start.pressed { background-position: 0 0, -476.1px -120.75px; }
+.controller.xbox.edit .button.pressed, .controller.xbox.edit .back.pressed, .controller.xbox.edit .start.pressed {
+  margin-top: 3px;
+  opacity: 1;
+  background-image: radial-gradient(circle at 35% 30%, rgba(120, 235, 255, 0.85), rgba(176, 96, 255, 0.85) 60%, rgba(214, 92, 255, 0.85)), url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png?v=10");
+  background-size: 100% 100%, 887px 443.5px;
+  background-blend-mode: screen, normal;
+  filter: brightness(1.15) drop-shadow(0 0 3px rgba(71, 226, 255, 0.95)) drop-shadow(0 0 6px rgba(176, 96, 255, 0.7));
 }
-.controller.xbox.edit .face.pressed,.controller.custom .face.pressed {opacity:1!important}
-.controller.xbox.edit .face.up,.controller.custom .face.up {left:38.15%!important;top:45.1%!important;width:5%!important;height:10%!important}
-.controller.xbox.edit .face.down,.controller.custom .face.down {left:38.15%!important;top:56.8%!important;width:5%!important;height:10%!important}
-.controller.xbox.edit .face.left,.controller.custom .face.left {left:34.9%!important;top:51.0%!important;width:6%!important;height:8%!important}
-.controller.xbox.edit .face.right,.controller.custom .face.right {left:41.4%!important;top:51.0%!important;width:6%!important;height:8%!important}
 
-/* View / Menu / Home. The Home button is only animated when the browser
-   reports it through Gamepad Viewer. */
-.controller.xbox.edit :is(.back,.start,.meta),.controller.custom :is(.back,.start,.meta){
-  display:block;position:absolute!important;float:none!important;
-  width:4.1%!important;height:8.2%!important;
-  right:auto!important;bottom:auto!important;
-  transform:translate(-50%,-50%)!important;
-  margin:0!important;
-  background:radial-gradient(circle,#ffffffaa,#b073ff80 50%,transparent 76%) center / 100% 100% no-repeat!important;
-  border-radius:50%!important;opacity:0!important;
+/* ---------- Home / Xbox button (only if the browser reports it) ---------- */
+.controller.xbox.edit > div.meta {
+  left: 302.8px; top: 72.9px; width: 57.0px; height: 57.0px;
+  border-radius: 50%;
+  background-image: radial-gradient(circle at 35% 30%, rgba(120, 235, 255, 0.85), rgba(176, 96, 255, 0.85) 60%, rgba(214, 92, 255, 0.85)), url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png?v=10");
+  background-size: 100% 100%, 887px 443.5px;
+  background-position: 0 0, -414.8px -47.9px;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply, normal;
+  filter: drop-shadow(0 0 3px rgba(71, 226, 255, 0.95)) drop-shadow(0 0 6px rgba(176, 96, 255, 0.7));
+  opacity: 0;
+  transition: opacity 40ms linear;
 }
-.controller.xbox.edit .back,.controller.custom .back {left:43.2%!important;top:30.8%!important}
-.controller.xbox.edit .start,.controller.custom .start {left:54.35%!important;top:30.8%!important}
-.controller.xbox.edit .meta,.controller.custom .meta {left:48.8%!important;top:17.1%!important}
-.controller.xbox.edit :is(.back,.start,.meta).pressed,
-.controller.custom :is(.back,.start,.meta).pressed {opacity:1!important}
+.controller.xbox.edit > div.meta.pressed { opacity: 1; }
 
-/* Shoulder effects. Do NOT force analog opacity for triggers: GPV supplies
-   it as the button travels. */
-.controller.xbox.edit :is(.bumper,.trigger),.controller.custom :is(.bumper,.trigger){
-  display:block;position:absolute!important;float:none!important;
-  box-sizing:border-box!important;
-  width:15%!important;height:10%!important;
-  right:auto!important;bottom:auto!important;
-  background:radial-gradient(ellipse,#7eeaffb0,#ae67ff70 40%,transparent 75%) center / 100% 100% no-repeat!important;
-  border-radius:40%!important;
-  opacity:0;
+/* ---------- D-pad ---------- */
+.controller.xbox.edit .face {
+  opacity: 0;
+  transition: opacity 30ms linear;
+  background-image: radial-gradient(circle at 35% 30%, rgba(120, 235, 255, 0.85), rgba(176, 96, 255, 0.85) 60%, rgba(214, 92, 255, 0.85)), url("https://tridentlabssd.github.io/mapkknowledge/controller-clean.png?v=10");
+  background-size: 100% 100%, 887px 443.5px;
+  background-blend-mode: screen, normal;
+  filter: brightness(1.2) drop-shadow(0 0 3px rgba(71, 226, 255, 0.95)) drop-shadow(0 0 6px rgba(176, 96, 255, 0.7));
 }
-.controller.xbox.edit .bumper,.controller.custom .bumper {top:8%!important}
-.controller.xbox.edit .trigger,.controller.custom .trigger {top:0!important}
-.controller.xbox.edit :is(.bumper,.trigger).left,.controller.custom :is(.bumper,.trigger).left {left:18%!important}
-.controller.xbox.edit :is(.bumper,.trigger).right,.controller.custom :is(.bumper,.trigger).right {left:67%!important}
-.controller.xbox.edit :is(.bumper,.trigger).pressed,.controller.custom :is(.bumper,.trigger).pressed {opacity:1!important}
+.controller.xbox.edit .face.pressed { opacity: 1; }
+.controller.xbox.edit .face.up { left: 222.0px; top: 217.0px; width: 28.0px; height: 43.5px; border-radius: 6px 6px 2px 2px; background-position: 0 0, -334.0px -192.0px; }
+.controller.xbox.edit .face.down { left: 222.0px; top: 260.5px; width: 28.0px; height: 42.5px; border-radius: 2px 2px 6px 6px; background-position: 0 0, -334.0px -235.5px; }
+.controller.xbox.edit .face.left { left: 193.0px; top: 246.0px; width: 43.0px; height: 29.0px; border-radius: 6px 2px 2px 6px; background-position: 0 0, -305.0px -221.0px; }
+.controller.xbox.edit .face.right { left: 236.0px; top: 246.0px; width: 43.0px; height: 29.0px; border-radius: 2px 6px 6px 2px; background-position: 0 0, -348.0px -221.0px; }
+
+/* ---------- bumpers (LB / RB) ---------- */
+.controller.xbox.edit .bumper {
+  opacity: 0;
+  transition: opacity 40ms linear;
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  filter: brightness(1.9) saturate(1.7) drop-shadow(0 0 3px rgba(71, 226, 255, 0.95)) drop-shadow(0 0 6px rgba(176, 96, 255, 0.7));
+}
+.controller.xbox.edit .bumper.pressed { opacity: 1; }
+.controller.xbox.edit .bumper.left  { left: 100px; top: 22px; width: 146px; height: 64px; background-position: -212px 3px; }
+.controller.xbox.edit .bumper.right { left: 415.5px; top: 22px; width: 146px; height: 64px; background-position: -527.5px 3px; }
+
+/* ---------- triggers (LT / RT): GPV sets inline opacity = pressure ---------- */
+.controller.xbox.edit .trigger {
+  position: absolute;
+  float: none;
+  margin: 0;
+  transform: none;
+  border-radius: 50% 50% 10px 10px / 100% 100% 6px 6px;
+  filter: drop-shadow(0 0 3px rgba(71, 226, 255, 0.95)) drop-shadow(0 0 6px rgba(176, 96, 255, 0.7));
+}
+.controller.xbox.edit .trigger.left  { left: 112px; top: 9px; width: 118px; height: 22px; background: linear-gradient(100deg, #47e2ff, #b060ff 55%, #d65cff); transform: rotate(-4deg); }
+.controller.xbox.edit .trigger.right { left: 431.5px; top: 9px; width: 118px; height: 22px; background: linear-gradient(260deg, #47e2ff, #b060ff 55%, #d65cff); transform: rotate(4deg); }
+
+/* ---------- thumbsticks: GPV's own default sticks, centred in the rings ---------- */
+.controller.xbox.edit .stick.left  { left: 123.8px; top: 121.45px; }
+.controller.xbox.edit .stick.right { left: 388.25px; top: 215.3px; }
